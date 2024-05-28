@@ -19,7 +19,22 @@ namespace ConsultasTSC.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        //[Route("[controller]")]
+        //[ApiController]
+
+        //public class FileController : Controller
+        //{
+
+        //    private readonly IConfiguration _configuration;
+
+        //    public FileController(IConfiguration config)
+        //    {
+        //        _configuration = config;
+        //    }
+
+
+
+            [HttpGet]
         // este metodo es sincrónico y bloqueará el hilo hasta que se complete la operación
         public ActionResult<IEnumerable<User>> GetUsers()
         {

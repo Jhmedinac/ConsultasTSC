@@ -1,7 +1,12 @@
 
 using ConsultasTSC.Data;
+using ConsultasTSC.Swagger;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Microsoft.Win32;
+using System.Reflection;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +17,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Custom Swagger configuration
+AddSwagger(builder.Services);
 
 var databaseType = builder.Configuration["DatabaseType"];
 if (databaseType == "SqlServer")
@@ -23,7 +30,13 @@ if (databaseType == "SqlServer")
                    options.UseSqlServer(catalog1ConnectionString));
 
     builder.Services.AddDbContext<CervezaContext>(options =>
-                   options.UseSqlServer(catalog1ConnectionString));
+                options.UseSqlServer(catalog1ConnectionString));
+
+    builder.Services.AddDbContext<OrganigramaContext>(options =>
+                   options.UseSqlServer(catalog2ConnectionString));
+
+    //builder.Services.AddDbContext<FileContext>(options =>
+    //               options.UseSqlServer(catalog2ConnectionString));
 }
 
 //    builder.Services.AddDbContext<UserContext>(option =>
@@ -43,6 +56,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    
+
 }
 
 app.UseHttpsRedirection();
@@ -52,6 +67,30 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+static void AddSwagger(IServiceCollection services)
+{
+    services.AddSwaggerGen(options =>
+    {
+        //var groupName = "v1";
+
+        //var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        //options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+        //options.SwaggerDoc(groupName, new OpenApiInfo
+        //{
+        //    Title = $"GO FILES  UTL API {groupName}",
+        //    Version = groupName,
+        //    Description = "FILES API",
+        //    Contact = new OpenApiContact
+        //    {
+        //        Name = "GO Consultores",
+        //        Email = string.Empty,
+        //        Url = new Uri("https://www.goconsultores.com/"),
+        //    }
+        //});
+        options.OperationFilter<CustomHeaders>();
+    });
+}
 //using ConsultasTSC.Data;
 //using Microsoft.EntityFrameworkCore;
 
