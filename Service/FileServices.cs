@@ -21,7 +21,7 @@ namespace ConsultasTSC.Services
                 {
                     con.Open();
 
-                    SqlCommand cmd = new SqlCommand("ConsultasTSC.SP_SaveFileData ", con);
+                    SqlCommand cmd = new SqlCommand("SP_SaveFileData ", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@pnFileId", SqlDbType.Int).Value = FileId;
@@ -190,7 +190,7 @@ namespace ConsultasTSC.Services
                 {
                     con.Open();
 
-                    SqlCommand cmd = new SqlCommand("ConsultasTSC.SP_Update_After_Error ", con);
+                    SqlCommand cmd = new SqlCommand("SP_Update_After_Error ", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@pnUploadId", SqlDbType.Int).Value = uploadId;
@@ -237,6 +237,8 @@ namespace ConsultasTSC.Services
                 response.Error = ex.ToString();
             }
         }
+
+
 
     }
     
