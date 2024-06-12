@@ -35,6 +35,17 @@ namespace ConsultasTSC.Swagger
                     Type = "string"
                 }
             });
+
+            operation.Parameters.Add(new OpenApiParameter
+            {
+                Name = "File_Path",
+                In = ParameterLocation.Header,
+                Required = true,
+                Schema = new OpenApiSchema
+                {
+                    Type = "string"
+                }
+            });
         }
     }
 }

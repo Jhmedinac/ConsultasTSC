@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
 
 namespace ConsultasTSC.Filter
@@ -13,6 +14,7 @@ namespace ConsultasTSC.Filter
         {
             string XHRUserName = "Username";
             string XHRPassword = "Password";
+            string XHRPath = "";
 
 
             if (!context.HttpContext.Request.Headers.TryGetValue(XHRUserName, out var UserName)
@@ -28,6 +30,18 @@ namespace ConsultasTSC.Filter
             XHRPassword = SystemParameters.AppPassword;
 
 
+            //if (context.HttpContext.Request.Headers.TryGetValue("Path", out var Path))
+            //{
+            //    // Usa headerValue
+            //    // Usa headerValue
+            //    XHRPath = ($"Header value: {Path}");
+            //}
+            //else
+            //{
+            //    // Maneja la ausencia del encabezado
+            //}
+
+   
 
             if (!(XHRUserName == UserName.ToString() && XHRPassword == Password.ToString()))
             {

@@ -14,6 +14,7 @@ namespace ConsultasTSC
         private static readonly string Region = "**-****-*";
         private static readonly string BucketName = "****";
 
+        //public static string AppBasePath { get; } = BasePath;
         public static string AppBasePath { get; } = BasePath;
         public static bool FolderIsRelative { get; } = IsRelative;
         public static string AppUserName { get; } = XHRUserName;

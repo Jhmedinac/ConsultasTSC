@@ -17,7 +17,9 @@ using System.Threading.Tasks;
 
 namespace ConsultasTSC.Controllers
 {
-    [Route("[controller]")]
+    //[Route("[controller]")]
+    [Route("File/[controller]")]
+
     [ApiController]
 
     public class FileController : Controller
@@ -191,7 +193,7 @@ namespace ConsultasTSC.Controllers
         /// <response code="400">BadRequest. An error on the service execution happened.</response>
         /// <response code="401">Unauthorized. The credential provided are invalid.</response>
         /// 
-        [HttpGet("/Download/{idFile}")]
+        [HttpGet("/Download_File/{idFile}")]
         [AuthFilter]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ServiceResponse<object>))]
